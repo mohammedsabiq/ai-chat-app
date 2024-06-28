@@ -1,24 +1,21 @@
-const apikey = "AIzaSyAn-xnoEOJm6R2GBK7b3GtD-EyrSuqSm8I";
-/*
- * Install the Generative AI SDK
- *
- * $ npm install @google/generative-ai
- *
- * See the getting started guide for more information
- * https://ai.google.dev/gemini-api/docs/get-started/node
- */
-
 import {
   GoogleGenerativeAI,
   HarmCategory,
   HarmBlockThreshold,
 } from "@google/generative-ai";
 
-const apiKey = "AIzaSyAn-xnoEOJm6R2GBK7b3GtD-EyrSuqSm8I";
+const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
+
+if (!apiKey) {
+  throw new Error(
+    "API key is not defined. Please check your environment variables."
+  );
+}
+
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-pro",
+  model: "gemini-1.5-flash",
 });
 
 const generationConfig = {
